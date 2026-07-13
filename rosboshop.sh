@@ -11,7 +11,7 @@ INSTANCE_ID=$(aws ec2 run-instances \
     --image-id "ami-0220d79f3f480ecf5" \
     --instance-type t3.micro \
     --security-groups "roboshop-common" "roboshop-$instance" \
-    --tag-specifications 'ResourceType=instance,Tags=[{Key=name,Value="roboshop-$instance"}]' \
+    --tag-specifications "ResourceType=instance,Tags=[{Key=name,Value="roboshop-$instance}]" \
     --query "Instances[0].InstanceId" \
     --output text
  )
