@@ -11,8 +11,8 @@ INSTANCE_ID=$(aws ec2 run-instances \
     --image-id "ami-0220d79f3f480ecf5" \
     --instance-type t3.micro \
     --security-groups "roboshop-common" "roboshop-$instance" \
-    --tag-specifications "ResourceType=instance,Tags=[{Key=name,Value="roboshop-$instance}]" \
-    --query "Instances[0].InstanceId" \
+    --tag-specifications 'ResourceType=instance,Tags=[{Key=name,Value="roboshop-$instance"}]' \
+    --query 'Instances[0].InstanceId' \
     --output text
  )
   echo Instance ID : $INSTANCE_ID"
@@ -31,12 +31,12 @@ INSTANCE_ID=$(aws ec2 run-instances \
  R53_RECORD="$instance.$DOMAIN_NAME"
 fi
 
-#### Updating R%# Record ###
+#### Updating R53 Record ###
  aws route53 change-resource-record-sets \
     --hosted-zone-id $ZONE_ID \
     --change-batch '
     {
-         "Comment": "Updating A record for the main website",
+         "Comment": "Update A record to new IP",
           "Changes": [
           {
            "Action": "UPSERT",
